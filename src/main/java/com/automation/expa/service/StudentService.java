@@ -2,16 +2,16 @@ package com.automation.expa.service;
 
 import com.automation.expa.domain.Student;
 import com.automation.expa.repository.StudentRepository;
-import com.automation.expa.web.rest.StudentResource;
-import lombok.Getter;
-import lombok.Setter;
+import com.automation.expa.web.rest.dto.StudentDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
+@Transactional
 public class StudentService {
 
     private final StudentRepository studentRepository;
@@ -21,8 +21,8 @@ public class StudentService {
         this.studentRepository = studentRepository;
     }
 
-    public Student getStudentById(Long id) {
-        return studentRepository.getOne(id);
+    public Optional<Student> getStudentById(Long id) {
+        return studentRepository.findById(id);
     }
 
     public Student createStudent(Student student){
@@ -31,10 +31,6 @@ public class StudentService {
 
     public void deleteStudentById(Long id){
         studentRepository.deleteById(id);
-    }
-
-    public void deleteStudent(Student student) {
-        studentRepository.delete(student);
     }
 
     public Student updateStudent(Student student) {
@@ -48,7 +44,4 @@ public class StudentService {
     public void removeAll() {
         studentRepository.deleteAll();
     }
-
-
-
 }
