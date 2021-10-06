@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -37,7 +36,8 @@ public class StudentResource {
     @PostMapping("/students")
     public ResponseEntity<StudentDto> createStudent(@RequestBody StudentDto studentDto) {
         Student student = Student.mapToStudentDto(studentDto);
-        return ResponseEntity.ok().body(studentDto);
+        studentService.createStudent(student);
+        return ResponseEntity.accepted().body(studentDto);
     }
 
     @DeleteMapping("/students/{id}")
@@ -63,10 +63,5 @@ public class StudentResource {
         } else {
             throw new StudentNotFoundException(id);
         }
-    }
-
-    @GetMapping("/students")
-    public List<Student> getAllStudents() {
-        return studentRepository.findAll();
     }
 }

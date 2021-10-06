@@ -1,17 +1,15 @@
 spring:
   datasource:
-    url: jdbc:h2:mem:testdb
-    driver-class-name: org.h2.Driver
-    username: sa
-    password: password
+    url: jdbc:postgresql://ec2-54-170-163-224.eu-west-1.compute.amazonaws.com:5432/d1lftqhbipt375
+    username: nqzrmlxyqwgyxu
+    password: f94dca9b59a3a42bfd23f131e7fd5644dd29d6dd5c2cb2e71dc6d309bf396466
+    driver-class-name: org.postgresql.Driver
   jpa:
-    database-platform: org.hibernate.dialect.H2Dialect
     hibernate:
-      ddl-auto: create-drop
+      ddl-auto: update
     show-sql: true
-  h2:
-    console:
-      enabled: true
+    database-platform: org.hibernate.dialect.PostgreSQL10Dialect
+    database: postgresql
 
 server:
   port: 8088
